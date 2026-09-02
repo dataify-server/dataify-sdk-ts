@@ -151,13 +151,13 @@ D:\dataify-TS-SDK\dist
 PowerShell 设置环境变量的命令是：
 
 ```powershell
-$env:DATAIFY_API_KEY="你的 API Key"
+$env:DATAIFY_API_TOKEN="你的 API Key"
 ```
 
 例如：
 
 ```powershell
-$env:DATAIFY_API_KEY="df_xxxxxxxxxxxxxxxxxxxxx"
+$env:DATAIFY_API_TOKEN="df_xxxxxxxxxxxxxxxxxxxxx"
 ```
 
 注意：
@@ -169,7 +169,7 @@ $env:DATAIFY_API_KEY="df_xxxxxxxxxxxxxxxxxxxxx"
 确认是否设置成功：
 
 ```powershell
-echo $env:DATAIFY_API_KEY
+echo $env:DATAIFY_API_TOKEN
 ```
 
 如果能看到你的 API Key，说明设置成功。
@@ -207,7 +207,7 @@ Bearer TEST_API_KEY
 执行：
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const res = await client.tools.google({ q: 'Dataify', json: '1' }); console.log(JSON.stringify(res, null, 2)); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const res = await client.tools.google({ q: 'Dataify', json: '1' }); console.log(JSON.stringify(res, null, 2)); })"
 ```
 
 成功时通常会返回 Google 搜索结果 JSON。
@@ -215,7 +215,7 @@ node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const cli
 如果返回鉴权错误，检查：
 
 - API Key 是否正确。
-- 是否执行了 `$env:DATAIFY_API_KEY="你的 API Key"`。
+- 是否执行了 `$env:DATAIFY_API_TOKEN="你的 API Key"`。
 - API Key 是否过期或被禁用。
 
 ## 12. 真实测试 2：Web Unlocker
@@ -223,7 +223,7 @@ node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const cli
 执行：
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const res = await client.webUnlocker.request({ url: 'https://example.com', type: 'html', js_render: false }); console.log(JSON.stringify(res, null, 2)); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const res = await client.webUnlocker.request({ url: 'https://example.com', type: 'html', js_render: false }); console.log(JSON.stringify(res, null, 2)); })"
 ```
 
 成功时会返回 Web Unlocker 的结果。
@@ -235,7 +235,7 @@ Scraper 一般会创建任务，不一定立即返回最终数据。
 示例：Amazon 商品详情。
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const res = await client.tools.amazonProductByUrl({ url: 'https://www.amazon.com/dp/B000000000' }); console.log(JSON.stringify(res, null, 2)); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const res = await client.tools.amazonProductByUrl({ url: 'https://www.amazon.com/dp/B000000000' }); console.log(JSON.stringify(res, null, 2)); })"
 ```
 
 注意：
@@ -255,13 +255,21 @@ task_id_123
 下载 JSON 文件：
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const response = await client.scraper.downloadTaskFile('task_id_123', 'json'); console.log('ok:', response.ok); console.log('status:', response.status); console.log(await response.text()); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const response = await client.scraper.downloadTaskFile('task_id_123', 'json'); console.log('ok:', response.ok); console.log('status:', response.status); console.log(await response.text()); })"
 ```
 
 下载 CSV 或 XLSX 时，不建议直接打印到终端。可以先只检查状态：
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const response = await client.scraper.downloadTaskFile('task_id_123', 'xlsx'); console.log('ok:', response.ok); console.log('status:', response.status); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const response = await client.scraper.downloadTaskFile('task_id_123', 'xlsx'); console.log('ok:', response.ok); console.log('status:', response.status); })"
+```
+
+### 14.3 查询 Scraper 任务状态
+
+使用 Builder 提交任务后返回的任务 ID。`处理中`、`成功`、`失败` 都是接口成功响应；HTTP 400 表示任务不存在或不属于当前 API Key，HTTP 403 表示缺少任务 ID 或 API Key 无效。
+
+```powershell
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const result = await client.scraper.getTaskStatus('task_id_123'); console.log(JSON.stringify(result, null, 2)); })"
 ```
 
 ## 15. 建议优先测试的工具
@@ -314,7 +322,7 @@ npm.cmd run build
 解决：
 
 ```powershell
-$env:DATAIFY_API_KEY="你的 API Key"
+$env:DATAIFY_API_TOKEN="你的 API Key"
 ```
 
 ### 16.3 `401` 或鉴权失败
@@ -359,4 +367,3 @@ chcp 65001
 - `client.tools.google()` 真实请求成功。
 - `client.webUnlocker.request()` 真实请求成功。
 - 至少一个 Scraper 工具能成功创建任务。
-

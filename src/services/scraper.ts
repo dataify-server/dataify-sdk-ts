@@ -1,7 +1,7 @@
 import { runtimeGet, runtimeGetResponse, runtimePostFormData } from "../http.js";
-import { DataifyMissingTokenError } from "../errors.js";
+import { DataifyMissingTokenError, DataifyUnsupportedDownloadTypeError } from "../errors.js";
 import type { DataifyClient } from "../client.js";
-import type { ParamRecord, ScraperRunOptions } from "../types.js";
+import type { ParamRecord, ScraperDownloadType, ScraperRunOptions, TaskStatusResponse } from "../types.js";
 
 export class ScraperService {
   constructor(private readonly client: DataifyClient) {}
@@ -23,19 +23,37 @@ export class ScraperService {
     return runtimeGet<T>(this.client, this.buildDownloadUrl(taskId, "json"));
   }
 
-  downloadTaskFile(taskId: string, type: "json" | "csv" | "xlsx" = "json"): Promise<Response> {
+  async getTaskStatus(taskId: string): Promise<TaskStatusResponse> {
+    return runtimeGet<TaskStatusResponse>(this.client, this.buildTaskStatusUrl(taskId));
+  }
+
+  downloadTaskFile(taskId: string, type: ScraperDownloadType = "json"): Promise<Response> {
     return runtimeGetResponse(this.client, this.buildDownloadUrl(taskId, type));
   }
 
-  buildDownloadUrl(taskId: string, type: "json" | "csv" | "xlsx" = "json"): string {
+  buildDownloadUrl(taskId: string, type: ScraperDownloadType = "json"): string {
     if (!this.client.apiKey) throw new DataifyMissingTokenError("apiKey");
+    if (!isSupportedDownloadType(type)) throw new DataifyUnsupportedDownloadTypeError();
     const params = new URLSearchParams({
       api_key: this.client.apiKey,
-      task_id: taskId,
+      task_id: taskId.trim(),
       type,
     });
     return `${this.client.scraperBaseUrl}/download?${params.toString()}`;
   }
+
+  buildTaskStatusUrl(taskId: string): string {
+    if (!this.client.apiKey) throw new DataifyMissingTokenError("apiKey");
+    const params = new URLSearchParams({
+      api_key: this.client.apiKey,
+      task_id: taskId.trim(),
+    });
+    return `${this.client.scraperBaseUrl}/task_status?${params.toString()}`;
+  }
+}
+
+function isSupportedDownloadType(type: string): type is ScraperDownloadType {
+  return type === "json" || type === "csv" || type === "xlsx";
 }
 
 function normalizeParameters(input: ParamRecord | Array<Record<string, unknown>>): Array<Record<string, unknown>> {

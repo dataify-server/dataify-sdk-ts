@@ -12,7 +12,7 @@
 - Web Unlocker：提交到 `https://webunlocker.dataify.com/request`
 - Scraper 任务结果下载：`https://scraperapi.dataify.com/download`
 
-这些接口全部使用 Dataify API Key。
+这些接口使用 Dataify API Key。`/builder`、`/request` 和 Web Unlocker 使用 Bearer Header；任务结果下载和任务状态查询使用接口规定的 `api_key` 查询参数。
 
 ```text
 Authorization: Bearer <api_key>
@@ -36,6 +36,7 @@ Authorization: Bearer <api_key>
 | `client.scraper.downloadTaskResult(taskId)` | `GET https://scraperapi.dataify.com/download?type=json` | API Key query | 下载 JSON 结果 |
 | `client.scraper.downloadTaskFile(taskId, type)` | `GET https://scraperapi.dataify.com/download` | API Key query | 下载 json/csv/xlsx 文件响应 |
 | `client.scraper.buildDownloadUrl(taskId, type)` | 本地生成 URL | API Key query | 只生成下载链接，不发起请求 |
+| `client.scraper.getTaskStatus(taskId)` | `GET https://scraperapi.dataify.com/task_status` | API Key query | 查询任务状态：处理中、成功、失败；HTTP 400 表示任务不存在或无权限，HTTP 403 表示缺参数或 API Key 无效 |
 
 ## Scraper 工具
 
@@ -170,7 +171,7 @@ Authorization: Bearer <api_key>
 import { DataifyClient } from "dataify-sdk";
 
 const client = new DataifyClient({
-  apiKey: process.env.DATAIFY_API_KEY,
+  apiKey: process.env.DATAIFY_API_TOKEN,
 });
 
 const result = await client.tools.google({

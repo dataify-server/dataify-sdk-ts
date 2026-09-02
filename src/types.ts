@@ -19,6 +19,18 @@ export interface ScraperRunOptions {
   spiderErrors?: boolean | string;
 }
 
+export type ScraperTaskStatus = "处理中" | "成功" | "失败";
+
+export type ScraperDownloadType = "json" | "csv" | "xlsx";
+
+export interface TaskStatusResponse {
+  data: {
+    task_id: string;
+    status: ScraperTaskStatus;
+  };
+  code: 200;
+}
+
 export interface SerpRunOptions {
   engine: string;
   params?: ParamRecord;

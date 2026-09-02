@@ -20,13 +20,18 @@
 npm install dataify-sdk
 ```
 
+Set `DATAIFY_API_TOKEN` for local development and deployment. `DATAIFY_TOKEN` and
+`DATAIFY_API_KEY` remain supported for compatibility with earlier SDK examples.
+When a legacy variable provides the credential, Node.js emits one migration
+warning per variable per process without including the credential value.
+
 ## Basic Usage
 
 ```ts
 import { DataifyClient } from "dataify-sdk";
 
 const client = new DataifyClient({
-  apiKey: process.env.DATAIFY_API_KEY,
+  apiKey: process.env.DATAIFY_API_TOKEN,
 });
 
 const result = await client.tools.google({
@@ -66,16 +71,33 @@ const response = await client.scraper.downloadTaskFile("task_id_here", "xlsx");
 console.log(response.status);
 ```
 
+`downloadTaskFile` accepts `"json"`, `"csv"`, or `"xlsx"` and returns the
+caller-owned `Response` body. Use `downloadTaskResult` when the JSON payload
+should be parsed automatically.
+
+## Scraper Task Status
+
+```ts
+const status = await client.scraper.getTaskStatus("task_id_here");
+console.log(status.data.status); // 处理中, 成功, or 失败
+```
+
+The service returns HTTP `400` when the task does not exist or is not owned by
+the API key, and HTTP `403` for a missing `task_id` or invalid API key.
+
 ## Runtime Endpoints
 
 - Scraper and SERP: `https://scraperapi.dataify.com`
 - Web Unlocker: `https://webunlocker.dataify.com`
 
-Requests use:
+Most requests use:
 
 ```text
 Authorization: Bearer <api_key>
 ```
+
+Scraper result downloads and task-status queries use the API contract's
+`api_key` query parameter instead.
 
 ## Local Development
 

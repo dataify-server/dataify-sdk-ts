@@ -18,8 +18,15 @@ export class DataifyApiError extends DataifySdkError {
 }
 
 export class DataifyMissingTokenError extends DataifySdkError {
-  constructor(kind: "apiKey") {
-    super(`Missing ${kind}.`);
+  constructor(_kind: "apiKey") {
+    super("Missing Dataify API token. Set DATAIFY_API_TOKEN; DATAIFY_TOKEN and DATAIFY_API_KEY are supported for compatibility.");
     this.name = "DataifyMissingTokenError";
+  }
+}
+
+export class DataifyUnsupportedDownloadTypeError extends DataifySdkError {
+  constructor() {
+    super("Unsupported scraper download type. Use json, csv, or xlsx.");
+    this.name = "DataifyUnsupportedDownloadTypeError";
   }
 }

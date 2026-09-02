@@ -149,13 +149,13 @@ The tests below import the SDK from `dist/index.js`.
 In PowerShell, set an environment variable like this:
 
 ```powershell
-$env:DATAIFY_API_KEY="your API Key"
+$env:DATAIFY_API_TOKEN="your API Key"
 ```
 
 Example:
 
 ```powershell
-$env:DATAIFY_API_KEY="df_xxxxxxxxxxxxxxxxxxxxx"
+$env:DATAIFY_API_TOKEN="df_xxxxxxxxxxxxxxxxxxxxx"
 ```
 
 Notes:
@@ -167,7 +167,7 @@ Notes:
 Check whether it was set:
 
 ```powershell
-echo $env:DATAIFY_API_KEY
+echo $env:DATAIFY_API_TOKEN
 ```
 
 If it prints your API Key, it is set correctly.
@@ -205,7 +205,7 @@ This calls the real API and may cost credits.
 Run:
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const res = await client.tools.google({ q: 'Dataify', json: '1' }); console.log(JSON.stringify(res, null, 2)); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const res = await client.tools.google({ q: 'Dataify', json: '1' }); console.log(JSON.stringify(res, null, 2)); })"
 ```
 
 If successful, it should return Google search result JSON.
@@ -213,7 +213,7 @@ If successful, it should return Google search result JSON.
 If authentication fails, check:
 
 - Whether your API Key is correct.
-- Whether you ran `$env:DATAIFY_API_KEY="your API Key"`.
+- Whether you ran `$env:DATAIFY_API_TOKEN="your API Key"`.
 - Whether the API Key is expired or disabled.
 
 ## 12. Real Test 2: Web Unlocker
@@ -221,7 +221,7 @@ If authentication fails, check:
 Run:
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const res = await client.webUnlocker.request({ url: 'https://example.com', type: 'html', js_render: false }); console.log(JSON.stringify(res, null, 2)); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const res = await client.webUnlocker.request({ url: 'https://example.com', type: 'html', js_render: false }); console.log(JSON.stringify(res, null, 2)); })"
 ```
 
 If successful, it should return a Web Unlocker response.
@@ -233,7 +233,7 @@ Scraper tools usually create a task. They may not return the final data immediat
 Example: Amazon product details.
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const res = await client.tools.amazonProductByUrl({ url: 'https://www.amazon.com/dp/B000000000' }); console.log(JSON.stringify(res, null, 2)); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const res = await client.tools.amazonProductByUrl({ url: 'https://www.amazon.com/dp/B000000000' }); console.log(JSON.stringify(res, null, 2)); })"
 ```
 
 Notes:
@@ -253,13 +253,21 @@ task_id_123
 Download JSON:
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const response = await client.scraper.downloadTaskFile('task_id_123', 'json'); console.log('ok:', response.ok); console.log('status:', response.status); console.log(await response.text()); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const response = await client.scraper.downloadTaskFile('task_id_123', 'json'); console.log('ok:', response.ok); console.log('status:', response.status); console.log(await response.text()); })"
 ```
 
 For CSV or XLSX, do not print the binary content to the terminal. Check the status first:
 
 ```powershell
-node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_KEY }); const response = await client.scraper.downloadTaskFile('task_id_123', 'xlsx'); console.log('ok:', response.ok); console.log('status:', response.status); })"
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const response = await client.scraper.downloadTaskFile('task_id_123', 'xlsx'); console.log('ok:', response.ok); console.log('status:', response.status); })"
+```
+
+### 14.3 Query Scraper Task Status
+
+Use the task ID returned by a Builder request. `处理中`, `成功`, and `失败` are successful API responses; HTTP 400 means the task does not exist or is not owned by the API key, while HTTP 403 means the task ID is missing or the API key is invalid.
+
+```powershell
+node -e "import('./dist/index.js').then(async ({ DataifyClient }) => { const client = new DataifyClient({ apiKey: process.env.DATAIFY_API_TOKEN }); const result = await client.scraper.getTaskStatus('task_id_123'); console.log(JSON.stringify(result, null, 2)); })"
 ```
 
 ## 15. Recommended Tools to Test First
@@ -312,7 +320,7 @@ Reason: API Key is not set.
 Fix:
 
 ```powershell
-$env:DATAIFY_API_KEY="your API Key"
+$env:DATAIFY_API_TOKEN="your API Key"
 ```
 
 ### 16.3 `401` or Authentication Error
@@ -357,4 +365,3 @@ The scraping SDK can be considered basically usable if:
 - `client.tools.google()` succeeds against the real API.
 - `client.webUnlocker.request()` succeeds against the real API.
 - At least one Scraper tool successfully creates a task.
-

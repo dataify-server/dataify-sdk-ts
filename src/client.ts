@@ -4,6 +4,13 @@ import { WebUnlockerService } from "./services/web-unlocker.js";
 import { GeneratedToolsService } from "./generated/tools.js";
 import type { DataifyClientOptions } from "./types.js";
 
+type RuntimeProcess = {
+  env?: Record<string, string | undefined>;
+  emitWarning?: (warning: string) => void;
+};
+
+const warnedLegacyTokenEnvironments = new Set<string>();
+
 export class DataifyClient {
   apiKey: string;
   readonly scraperBaseUrl: string;
@@ -17,7 +24,7 @@ export class DataifyClient {
   readonly tools: GeneratedToolsService;
 
   constructor(options: DataifyClientOptions = {}) {
-    this.apiKey = options.apiKey?.trim() ?? "";
+    this.apiKey = resolveApiKey(options.apiKey);
     this.scraperBaseUrl = trimBaseUrl(options.scraperBaseUrl ?? "https://scraperapi.dataify.com");
     this.webUnlockerBaseUrl = trimBaseUrl(options.webUnlockerBaseUrl ?? "https://webunlocker.dataify.com");
     this.timeoutMs = options.timeoutMs ?? 120_000;
@@ -40,4 +47,52 @@ export class DataifyClient {
 
 function trimBaseUrl(baseUrl: string): string {
   return baseUrl.trim().replace(/\/+$/, "");
+}
+
+function resolveApiKey(explicitApiKey?: string): string {
+  const runtimeProcess = (globalThis as typeof globalThis & { process?: RuntimeProcess }).process;
+  const environment = runtimeProcess?.env;
+  const explicitToken = normalizeApiKey(explicitApiKey);
+  if (explicitToken) {
+    warnIfLegacyEnvironmentToken(explicitToken, runtimeProcess);
+    return explicitToken;
+  }
+  const standardToken = normalizeApiKey(environment?.DATAIFY_API_TOKEN);
+  if (standardToken) {
+    return standardToken;
+  }
+  const legacyToken = normalizeApiKey(environment?.DATAIFY_TOKEN);
+  if (legacyToken) {
+    warnForLegacyEnvironment("DATAIFY_TOKEN", runtimeProcess);
+    return legacyToken;
+  }
+  const legacyApiKey = normalizeApiKey(environment?.DATAIFY_API_KEY);
+  if (legacyApiKey) {
+    warnForLegacyEnvironment("DATAIFY_API_KEY", runtimeProcess);
+    return legacyApiKey;
+  }
+  return "";
+}
+
+function normalizeApiKey(value?: string): string {
+  return value?.trim() ?? "";
+}
+
+function warnIfLegacyEnvironmentToken(token: string, runtimeProcess?: RuntimeProcess): void {
+  const environment = runtimeProcess?.env;
+  if (token === normalizeApiKey(environment?.DATAIFY_TOKEN)) {
+    warnForLegacyEnvironment("DATAIFY_TOKEN", runtimeProcess);
+    return;
+  }
+  if (token === normalizeApiKey(environment?.DATAIFY_API_KEY)) {
+    warnForLegacyEnvironment("DATAIFY_API_KEY", runtimeProcess);
+  }
+}
+
+function warnForLegacyEnvironment(name: "DATAIFY_TOKEN" | "DATAIFY_API_KEY", runtimeProcess?: RuntimeProcess): void {
+  if (warnedLegacyTokenEnvironments.has(name)) {
+    return;
+  }
+  warnedLegacyTokenEnvironments.add(name);
+  runtimeProcess?.emitWarning?.(`dataify: ${name} 已兼容读取，建议迁移至 DATAIFY_API_TOKEN。`);
 }
