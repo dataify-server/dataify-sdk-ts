@@ -208,6 +208,8 @@ const SPECIAL_BY_METHOD = {
   linkedinJobListingsInformationByKeyword: { keyword: "product manager", location: "New York", page_turning: "1", remote: "false" },
   amazonProductListByKeywordsDomain: { domain: "https://www.amazon.com", keyword: "coffee", page_turning: "1" },
   amazonProductByAsin: { asin: "B0BZYCJK89" },
+  chatgptAnswerByKeywords: { search_terms: "What is Dataify?" },
+  chatgptAnswerByUrl: { chatgpt_url: "https://chatgpt.com/?q=What%20is%20Dataify" },
 };
 
 function urlFor(spec, param) {

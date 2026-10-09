@@ -22,9 +22,9 @@ Authorization: Bearer <api_key>
 
 | 项目 | 数量 |
 |---|---:|
-| Scraper 工具 | 88 |
+| Scraper 工具 | 90 |
 | SERP 工具 | 25 |
-| SDK 工具方法合计 | 113 |
+| SDK 工具方法合计 | 115 |
 
 ## 固定运行方法
 
@@ -132,6 +132,8 @@ Authorization: Bearer <api_key>
 | 86 | `amazonGlobalProductByKeywords` | `amazon_global-product_by-keywords` | 亚马逊 | `amazon.com` | page_turning, highest_price, lowest_price, domain, keyword |
 | 87 | `amazonGlobalProductByKeywordsBrand` | `amazon_global-product_by-keywords-brand` | 亚马逊 | `amazon.com` | page_turning, brands, keyword |
 | 88 | `amazonGlobalProductByUrl` | `amazon_global-product_by-url` | 亚马逊 | `amazon.com` | url |
+| 89 | `chatgptAnswerByKeywords` | `chatgpt_answer_by-keywords` | ChatGPT | `chatgpt.com` | search_terms |
+| 90 | `chatgptAnswerByUrl` | `chatgpt_answer_by-url` | ChatGPT | `chatgpt.com` | chatgpt_url |
 
 ## SERP 工具
 

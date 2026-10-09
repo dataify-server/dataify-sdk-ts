@@ -1,0 +1,1687 @@
+{
+  "scrapers": [
+    {
+      "id": "airbnb_product_by-searchurl",
+      "displayName": "搜索URL",
+      "product": "Airbnb",
+      "productSign": "",
+      "spiderName": "airbnb.com",
+      "group": "Airbnb房产信息采集工具",
+      "toolId": 116,
+      "params": [
+        "country",
+        "searchurl"
+      ],
+      "required": [
+        "215"
+      ]
+    },
+    {
+      "id": "booking_hotellist_by-url",
+      "displayName": "通过URL采集",
+      "product": "Booking",
+      "productSign": "",
+      "spiderName": "booking.com",
+      "group": "Booking 酒店信息采集工具",
+      "toolId": 43,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "57",
+        "68"
+      ]
+    },
+    {
+      "id": "crunchbase_company_by-keywords",
+      "displayName": "关键词",
+      "product": "Crunchbase",
+      "productSign": "",
+      "spiderName": "crunchbase.com",
+      "group": "Crunchbase 公司信息采集工具",
+      "toolId": 70,
+      "params": [
+        "keyword"
+      ],
+      "required": [
+        "103"
+      ]
+    },
+    {
+      "id": "crunchbase_company_by-url",
+      "displayName": "URL",
+      "product": "Crunchbase",
+      "productSign": "",
+      "spiderName": "crunchbase.com",
+      "group": "Crunchbase 公司信息采集工具",
+      "toolId": 69,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "102"
+      ]
+    },
+    {
+      "id": "ebay_ebay_by-category-url",
+      "displayName": "通过类别URL采集",
+      "product": "eBay",
+      "productSign": "",
+      "spiderName": "ebay.com",
+      "group": "eBay 信息采集工具",
+      "toolId": 66,
+      "params": [
+        "count",
+        "url"
+      ],
+      "required": [
+        "100"
+      ]
+    },
+    {
+      "id": "ebay_ebay_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "eBay",
+      "productSign": "",
+      "spiderName": "ebay.com",
+      "group": "eBay 信息采集工具",
+      "toolId": 67,
+      "params": [
+        "count",
+        "keywords"
+      ],
+      "required": [
+        "101"
+      ]
+    },
+    {
+      "id": "ebay_ebay_by-listurl",
+      "displayName": "通过店铺网址采集",
+      "product": "eBay",
+      "productSign": "",
+      "spiderName": "ebay.com",
+      "group": "eBay 信息采集工具",
+      "toolId": 68,
+      "params": [
+        "count",
+        "url"
+      ],
+      "required": [
+        "99"
+      ]
+    },
+    {
+      "id": "ebay_ebay_by-url",
+      "displayName": "通过URL采集",
+      "product": "eBay",
+      "productSign": "",
+      "spiderName": "ebay.com",
+      "group": "eBay 信息采集工具",
+      "toolId": 65,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "99"
+      ]
+    },
+    {
+      "id": "facebook_profile_by-profiles-url",
+      "displayName": "通过个人主页URL采集",
+      "product": "Facebook",
+      "productSign": "",
+      "spiderName": "facebook.com",
+      "group": "Facebook 个人主页采集工具",
+      "toolId": 115,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "186"
+      ]
+    },
+    {
+      "id": "facebook_comment_by-comments-url",
+      "displayName": "通过URL采集",
+      "product": "Facebook",
+      "productSign": "",
+      "spiderName": "facebook.com",
+      "group": "Facebook 帖子评论采集工具",
+      "toolId": 112,
+      "params": [
+        "comments_sort",
+        "limit_records",
+        "get_all_replies",
+        "url"
+      ],
+      "required": [
+        "212"
+      ]
+    },
+    {
+      "id": "facebook_event_by-eventlist-url",
+      "displayName": "通过活动列表URL采集",
+      "product": "Facebook",
+      "productSign": "",
+      "spiderName": "facebook.com",
+      "group": "Facebook活动采集工具",
+      "toolId": 126,
+      "params": [
+        "upcoming_events_only",
+        "url"
+      ],
+      "required": [
+        "238"
+      ]
+    },
+    {
+      "id": "facebook_event_by-search-url",
+      "displayName": "通过活动搜索URL采集",
+      "product": "Facebook",
+      "productSign": "",
+      "spiderName": "facebook.com",
+      "group": "Facebook活动采集工具",
+      "toolId": 113,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "172"
+      ]
+    },
+    {
+      "id": "facebook_post_by-posts-url",
+      "displayName": "通过帖子 URL采集",
+      "product": "Facebook",
+      "productSign": "",
+      "spiderName": "facebook.com",
+      "group": "Facebook帖子采集工具",
+      "toolId": 114,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "212"
+      ]
+    },
+    {
+      "id": "github_repository_by-repo-url",
+      "displayName": "通过仓库URL采集",
+      "product": "Github",
+      "productSign": "",
+      "spiderName": "github.com",
+      "group": "Github仓库信息采集工具",
+      "toolId": 105,
+      "params": [
+        "repo_url"
+      ],
+      "required": [
+        "180"
+      ]
+    },
+    {
+      "id": "github_repository_by-search-url",
+      "displayName": "通过搜索URL采集",
+      "product": "Github",
+      "productSign": "",
+      "spiderName": "github.com",
+      "group": "Github仓库信息采集工具",
+      "toolId": 109,
+      "params": [
+        "max_num",
+        "page_turning",
+        "search_url"
+      ],
+      "required": [
+        "227"
+      ]
+    },
+    {
+      "id": "github_repository_by-url",
+      "displayName": "通过URL采集",
+      "product": "Github",
+      "productSign": "",
+      "spiderName": "github.com",
+      "group": "Github仓库信息采集工具",
+      "toolId": 101,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "231"
+      ]
+    },
+    {
+      "id": "glassdoor_company_by-inputfilter",
+      "displayName": "通过过滤器采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 公司概况信息采集工具",
+      "toolId": 72,
+      "params": [
+        "Job title",
+        "industries",
+        "location",
+        "company_name"
+      ],
+      "required": [
+        "104"
+      ]
+    },
+    {
+      "id": "glassdoor_company_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 公司概况信息采集工具",
+      "toolId": 73,
+      "params": [
+        "max_search_results",
+        "search_url"
+      ],
+      "required": [
+        "108",
+        "109"
+      ]
+    },
+    {
+      "id": "glassdoor_company_by-listurl",
+      "displayName": "通过搜索网址采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 公司概况信息采集工具",
+      "toolId": 74,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "110"
+      ]
+    },
+    {
+      "id": "glassdoor_company_by-url",
+      "displayName": "通过URL采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 公司概况信息采集工具",
+      "toolId": 71,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "104"
+      ]
+    },
+    {
+      "id": "glassdoor_joblistings_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 招聘信息采集工具",
+      "toolId": 77,
+      "params": [
+        "country",
+        "location",
+        "keyword"
+      ],
+      "required": [
+        "114",
+        "113",
+        "115"
+      ]
+    },
+    {
+      "id": "glassdoor_joblistings_by-listurl",
+      "displayName": "通过搜索网址采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 招聘信息采集工具",
+      "toolId": 78,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "116"
+      ]
+    },
+    {
+      "id": "glassdoor_joblistings_by-url",
+      "displayName": "通过URL采集",
+      "product": "Glassdoor",
+      "productSign": "",
+      "spiderName": "glassdoor.com",
+      "group": "Glassdoor 招聘信息采集工具",
+      "toolId": 76,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "112"
+      ]
+    },
+    {
+      "id": "google_comment_by-url",
+      "displayName": "通过URL采集",
+      "product": "Google",
+      "productSign": "",
+      "spiderName": "google.com",
+      "group": "Google 地图评论信息采集工具",
+      "toolId": 54,
+      "params": [
+        "days_limit",
+        "url"
+      ],
+      "required": [
+        "82"
+      ]
+    },
+    {
+      "id": "google_map-details_by-cid",
+      "displayName": "通过cid采集",
+      "product": "Google",
+      "productSign": "",
+      "spiderName": "google.com",
+      "group": "Google 地图详细信息采集工具",
+      "toolId": 56,
+      "params": [
+        "CID"
+      ],
+      "required": [
+        "84"
+      ]
+    },
+    {
+      "id": "google_map-details_by-location",
+      "displayName": "通过位置采集",
+      "product": "Google",
+      "productSign": "",
+      "spiderName": "google.com",
+      "group": "Google 地图详细信息采集工具",
+      "toolId": 57,
+      "params": [
+        "zoom_level",
+        "long",
+        "lat",
+        "maximum",
+        "keyword",
+        "country"
+      ],
+      "required": [
+        "85",
+        "89"
+      ]
+    },
+    {
+      "id": "google_map-details_by-placeid",
+      "displayName": "通过place_id采集",
+      "product": "Google",
+      "productSign": "",
+      "spiderName": "google.com",
+      "group": "Google 地图详细信息采集工具",
+      "toolId": 58,
+      "params": [
+        "place_id"
+      ],
+      "required": [
+        "90"
+      ]
+    },
+    {
+      "id": "google_map-details_by-url",
+      "displayName": "通过URL采集",
+      "product": "Google",
+      "productSign": "",
+      "spiderName": "google.com",
+      "group": "Google 地图详细信息采集工具",
+      "toolId": 55,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "82"
+      ]
+    },
+    {
+      "id": "google_shopping_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "Google",
+      "productSign": "",
+      "spiderName": "google.com",
+      "group": "Google 购物信息采集工具",
+      "toolId": 60,
+      "params": [
+        "country",
+        "keyword"
+      ],
+      "required": [
+        "92"
+      ]
+    },
+    {
+      "id": "google-play-store_reviews_by-url",
+      "displayName": "APP URL",
+      "product": "Google Play Store",
+      "productSign": "",
+      "spiderName": "play.google.com",
+      "group": "Google Play 商店评论采集工具",
+      "toolId": 128,
+      "params": [
+        "country",
+        "end date",
+        "start date",
+        "num_of_reviews",
+        "app_url"
+      ],
+      "required": [
+        "214"
+      ]
+    },
+    {
+      "id": "google-play-store_information_by-url",
+      "displayName": "APP URL",
+      "product": "Google Play Store",
+      "productSign": "",
+      "spiderName": "play.google.com",
+      "group": "Google Play商店信息采集工具",
+      "toolId": 121,
+      "params": [
+        "country",
+        "app_url"
+      ],
+      "required": [
+        "214"
+      ]
+    },
+    {
+      "id": "indeed_companies-info_by-company-list-url",
+      "displayName": "通过公司列表URL采集",
+      "product": "Indeed",
+      "productSign": "",
+      "spiderName": "indeed.com",
+      "group": "Indeed公司信息采集工具",
+      "toolId": 83,
+      "params": [
+        "company_list_url"
+      ],
+      "required": [
+        "129"
+      ]
+    },
+    {
+      "id": "indeed_companies-info_by-company-url",
+      "displayName": "通过公司URL采集",
+      "product": "Indeed",
+      "productSign": "",
+      "spiderName": "indeed.com",
+      "group": "Indeed公司信息采集工具",
+      "toolId": 82,
+      "params": [
+        "company_url"
+      ],
+      "required": [
+        "120"
+      ]
+    },
+    {
+      "id": "indeed_companies-info_by-industry-and-state",
+      "displayName": "通过行业和地区采集",
+      "product": "Indeed",
+      "productSign": "",
+      "spiderName": "indeed.com",
+      "group": "Indeed公司信息采集工具",
+      "toolId": 84,
+      "params": [
+        "state",
+        "industry"
+      ],
+      "required": [
+        "130"
+      ]
+    },
+    {
+      "id": "indeed_companies-info_by-keyword",
+      "displayName": "通过关键词采集",
+      "product": "Indeed",
+      "productSign": "",
+      "spiderName": "indeed.com",
+      "group": "Indeed公司信息采集工具",
+      "toolId": 85,
+      "params": [
+        "keyword"
+      ],
+      "required": [
+        "132"
+      ]
+    },
+    {
+      "id": "indeed_job-listings_by-job-url",
+      "displayName": "通过职位URL采集",
+      "product": "Indeed",
+      "productSign": "",
+      "spiderName": "indeed.com",
+      "group": "Indeed职位列表采集工具",
+      "toolId": 80,
+      "params": [
+        "job_url"
+      ],
+      "required": [
+        "119"
+      ]
+    },
+    {
+      "id": "ins_allreel_by-url",
+      "displayName": "通过列表 URL采集",
+      "product": "Instagram",
+      "productSign": "",
+      "spiderName": "instagram.com",
+      "group": "Instagram Reel 信息采集工具",
+      "toolId": 33,
+      "params": [
+        "end_date",
+        "start_date",
+        "posts_to_not_include",
+        "num_of_posts",
+        "url"
+      ],
+      "required": [
+        "50"
+      ]
+    },
+    {
+      "id": "ins_reel_by-listurl",
+      "displayName": "通过网址采集",
+      "product": "Instagram",
+      "productSign": "",
+      "spiderName": "instagram.com",
+      "group": "Instagram Reel 信息采集工具",
+      "toolId": 34,
+      "params": [
+        "end_date",
+        "start_date",
+        "posts_to_not_include",
+        "num_of_posts",
+        "url"
+      ],
+      "required": [
+        "50"
+      ]
+    },
+    {
+      "id": "ins_reel_by-url",
+      "displayName": "通过详情 URL采集",
+      "product": "Instagram",
+      "productSign": "",
+      "spiderName": "instagram.com",
+      "group": "Instagram Reel 信息采集工具",
+      "toolId": 32,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "50"
+      ]
+    },
+    {
+      "id": "ins_profiles_by-profileurl",
+      "displayName": "通过个人资料 URL采集",
+      "product": "Instagram",
+      "productSign": "",
+      "spiderName": "instagram.com",
+      "group": "Instagram 个人资料采集工具",
+      "toolId": 30,
+      "params": [
+        "profileurl"
+      ],
+      "required": [
+        "41"
+      ]
+    },
+    {
+      "id": "ins_profiles_by-username",
+      "displayName": "通过Instagram 用户名采集",
+      "product": "Instagram",
+      "productSign": "",
+      "spiderName": "instagram.com",
+      "group": "Instagram 个人资料采集工具",
+      "toolId": 29,
+      "params": [
+        "username"
+      ],
+      "required": [
+        "47"
+      ]
+    },
+    {
+      "id": "ins_comment_by-posturl",
+      "displayName": "通过帖子URL采集",
+      "product": "Instagram",
+      "productSign": "",
+      "spiderName": "instagram.com",
+      "group": "Instagram 帖子评论采集工具",
+      "toolId": 31,
+      "params": [
+        "posturl"
+      ],
+      "required": [
+        "46"
+      ]
+    },
+    {
+      "id": "reddit_comment_by-url",
+      "displayName": "通过URL采集",
+      "product": "Reddit",
+      "productSign": "",
+      "spiderName": "reddit.com",
+      "group": "Reddit 帖子评论采集工具",
+      "toolId": 42,
+      "params": [
+        "comment_limit",
+        "load_all_replies",
+        "days_back",
+        "url"
+      ],
+      "required": [
+        "57"
+      ]
+    },
+    {
+      "id": "reddit_posts_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "Reddit",
+      "productSign": "",
+      "spiderName": "reddit.com",
+      "group": "Reddit 帖子信息采集工具",
+      "toolId": 40,
+      "params": [
+        "sort_by",
+        "num_of_posts",
+        "date",
+        "keyword"
+      ],
+      "required": [
+        "58"
+      ]
+    },
+    {
+      "id": "reddit_posts_by-subredditurl",
+      "displayName": "通过subreddit url采集",
+      "product": "Reddit",
+      "productSign": "",
+      "spiderName": "reddit.com",
+      "group": "Reddit 帖子信息采集工具",
+      "toolId": 41,
+      "params": [
+        "sort_by_time",
+        "num_of_posts",
+        "sort_by",
+        "url"
+      ],
+      "required": [
+        "62"
+      ]
+    },
+    {
+      "id": "reddit_posts_by-url",
+      "displayName": "通过帖子 URL采集",
+      "product": "Reddit",
+      "productSign": "",
+      "spiderName": "reddit.com",
+      "group": "Reddit 帖子信息采集工具",
+      "toolId": 39,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "57"
+      ]
+    },
+    {
+      "id": "tiktok_profiles_by-listurl",
+      "displayName": "通过搜索网址采集",
+      "product": "Tiktok",
+      "productSign": "",
+      "spiderName": "tiktok.com",
+      "group": "TikTok个人资料信息采集工具",
+      "toolId": 45,
+      "params": [
+        "page_turning",
+        "country",
+        "search_url"
+      ],
+      "required": [
+        "71"
+      ]
+    },
+    {
+      "id": "tiktok_profiles_by-url",
+      "displayName": "通过URL采集",
+      "product": "Tiktok",
+      "productSign": "",
+      "spiderName": "tiktok.com",
+      "group": "TikTok个人资料信息采集工具",
+      "toolId": 44,
+      "params": [
+        "country",
+        "url"
+      ],
+      "required": [
+        "69"
+      ]
+    },
+    {
+      "id": "tiktok_comment_by-url",
+      "displayName": "通过URL采集",
+      "product": "Tiktok",
+      "productSign": "",
+      "spiderName": "tiktok.com",
+      "group": "TikTok评论信息采集工具",
+      "toolId": 53,
+      "params": [
+        "page_turning",
+        "url"
+      ],
+      "required": [
+        "72"
+      ]
+    },
+    {
+      "id": "tiktok_shop_by-url",
+      "displayName": "通过URL采集",
+      "product": "Tiktok",
+      "productSign": "",
+      "spiderName": "tiktok.com",
+      "group": "TikTok商店信息采集工具",
+      "toolId": 50,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "78"
+      ]
+    },
+    {
+      "id": "tiktok_posts_by-listurl",
+      "displayName": "通过列表URL采集",
+      "product": "Tiktok",
+      "productSign": "",
+      "spiderName": "tiktok.com",
+      "group": "TikTok帖子信息采集工具",
+      "toolId": 49,
+      "params": [
+        "num_of_posts",
+        "url"
+      ],
+      "required": [
+        "239"
+      ]
+    },
+    {
+      "id": "twitter_profile_by-profileurl",
+      "displayName": "通过个人资料 URL采集",
+      "product": "Twitter",
+      "productSign": "",
+      "spiderName": "x.com",
+      "group": "Twitter（X）个人资料采集工具",
+      "toolId": 100,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "55"
+      ]
+    },
+    {
+      "id": "twitter_profile_by-username",
+      "displayName": "通过Twitter 用户名采集",
+      "product": "Twitter",
+      "productSign": "",
+      "spiderName": "x.com",
+      "group": "Twitter（X）个人资料采集工具",
+      "toolId": 103,
+      "params": [
+        "user_name"
+      ],
+      "required": [
+        "54"
+      ]
+    },
+    {
+      "id": "twitter_post_by-profileurl",
+      "displayName": "通过个人资料URL采集",
+      "product": "Twitter",
+      "productSign": "",
+      "spiderName": "x.com",
+      "group": "Twitter（X）帖子信息采集工具",
+      "toolId": 117,
+      "params": [
+        "max_number_of_posts",
+        "url"
+      ],
+      "required": [
+        "55"
+      ]
+    },
+    {
+      "id": "walmart_product_by-category-url",
+      "displayName": "通过类别URL采集",
+      "product": "Walmart",
+      "productSign": "",
+      "spiderName": "walmart.com",
+      "group": "Walmart 产品信息采集工具",
+      "toolId": 62,
+      "params": [
+        "page_turning",
+        "all_variations",
+        "category_url"
+      ],
+      "required": [
+        "95",
+        "94",
+        "146"
+      ]
+    },
+    {
+      "id": "walmart_product_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "Walmart",
+      "productSign": "",
+      "spiderName": "walmart.com",
+      "group": "Walmart 产品信息采集工具",
+      "toolId": 64,
+      "params": [
+        "page_turning",
+        "keyword",
+        "all_variations",
+        "domain"
+      ],
+      "required": [
+        "228"
+      ]
+    },
+    {
+      "id": "walmart_product_by-sku",
+      "displayName": "通过SKU采集",
+      "product": "Walmart",
+      "productSign": "",
+      "spiderName": "walmart.com",
+      "group": "Walmart 产品信息采集工具",
+      "toolId": 63,
+      "params": [
+        "all_variations",
+        "sku"
+      ],
+      "required": [
+        "97"
+      ]
+    },
+    {
+      "id": "walmart_product_by-url",
+      "displayName": "通过URL采集",
+      "product": "Walmart",
+      "productSign": "",
+      "spiderName": "walmart.com",
+      "group": "Walmart 产品信息采集工具",
+      "toolId": 61,
+      "params": [
+        "all_variations",
+        "url"
+      ],
+      "required": [
+        "93"
+      ]
+    },
+    {
+      "id": "youtube_profiles_by-keyword",
+      "displayName": "通过关键词采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 个人资料采集工具",
+      "toolId": 22,
+      "params": [
+        "page_turning",
+        "keyword"
+      ],
+      "required": [
+        "10",
+        "34"
+      ]
+    },
+    {
+      "id": "youtube_profiles_by-url",
+      "displayName": "通过URL采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 个人资料采集工具",
+      "toolId": 23,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "35"
+      ]
+    },
+    {
+      "id": "youtube_comment_by-id",
+      "displayName": "通过Video ID采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 评论信息采集工具",
+      "toolId": 24,
+      "params": [
+        "num_of_comments",
+        "sort_by",
+        "load_replies",
+        "video_id"
+      ],
+      "required": [
+        "29",
+        "31",
+        "32",
+        "33"
+      ]
+    },
+    {
+      "id": "youtube_product_by-id",
+      "displayName": "通过Video ID采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 视频基本信息采集工具",
+      "toolId": 26,
+      "params": [
+        "video_id",
+        "subtitles_language",
+        "subtitles_type",
+        "selected_only"
+      ],
+      "required": [
+        "29"
+      ]
+    },
+    {
+      "id": "youtube_video_by-url",
+      "displayName": "通过URL采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 视频文件采集工具",
+      "toolId": 6,
+      "params": [
+        "url",
+        "resolution",
+        "video_codec",
+        "audio_format",
+        "bitrate",
+        "subtitles_language",
+        "selected_only"
+      ]
+    },
+    {
+      "id": "youtube_audio_by-url",
+      "displayName": "通过URL采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 音频文件采集工具",
+      "toolId": 5,
+      "params": [
+        "url",
+        "bitrate",
+        "audio_format",
+        "subtitles_language",
+        "kilohertz",
+        "is_subtitles",
+        "selected_only"
+      ]
+    },
+    {
+      "id": "youtube_transcript_by-id",
+      "displayName": "通过Video ID采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube 字幕文件采集工具",
+      "toolId": 25,
+      "params": [
+        "video_id",
+        "subtitles_language",
+        "subtitles_type",
+        "selected_only"
+      ],
+      "required": [
+        "29"
+      ]
+    },
+    {
+      "id": "youtube_video-post_by-explore",
+      "displayName": "通过探索采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube视频帖子采集工具",
+      "toolId": 118,
+      "params": [
+        "all_tabs",
+        "url"
+      ],
+      "required": [
+        "185"
+      ]
+    },
+    {
+      "id": "youtube_video-post_by-hashtag",
+      "displayName": "通过标签采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube视频帖子采集工具",
+      "toolId": 111,
+      "params": [
+        "num_of_posts",
+        "hashtag"
+      ],
+      "required": [
+        "222"
+      ]
+    },
+    {
+      "id": "youtube_video-post_by-keyword",
+      "displayName": "通过关键词采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube视频帖子采集工具",
+      "toolId": 104,
+      "params": [
+        "keyword",
+        "num_of_posts"
+      ],
+      "required": [
+        "228"
+      ]
+    },
+    {
+      "id": "youtube_video-post_by-podcast-url",
+      "displayName": "通过播客URL采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube视频帖子采集工具",
+      "toolId": 124,
+      "params": [
+        "num_of_posts",
+        "url"
+      ],
+      "required": [
+        "185"
+      ]
+    },
+    {
+      "id": "youtube_video-post_by-search-filters",
+      "displayName": "通过搜索过滤器采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube视频帖子采集工具",
+      "toolId": 108,
+      "params": [
+        "num_of_posts",
+        "upload_date",
+        "duration",
+        "type",
+        "features",
+        "keyword_search"
+      ],
+      "required": [
+        "196"
+      ]
+    },
+    {
+      "id": "youtube_video-post_by-url",
+      "displayName": "通过URL采集",
+      "product": "YouTube",
+      "productSign": "",
+      "spiderName": "youtube.com",
+      "group": "YouTube视频帖子采集工具",
+      "toolId": 125,
+      "params": [
+        "num_of_posts",
+        "start_index",
+        "order_by",
+        "url"
+      ],
+      "required": [
+        "178"
+      ]
+    },
+    {
+      "id": "zillow_product_by-filter",
+      "displayName": "通过过滤器采集",
+      "product": "Zillow",
+      "productSign": "",
+      "spiderName": "zillow.com",
+      "group": "Zillow 房产详细信息采集工具",
+      "toolId": 18,
+      "params": [
+        "maximum",
+        "days_on_zillow",
+        "HomeType",
+        "listingCategory",
+        "keywords-location"
+      ],
+      "required": [
+        "24"
+      ]
+    },
+    {
+      "id": "linkedin_company_information_by-url",
+      "displayName": "通过URL采集",
+      "product": "领英",
+      "productSign": "",
+      "spiderName": "linkedin.com",
+      "group": "LinkedIn公司信息采集工具",
+      "toolId": 89,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "157"
+      ]
+    },
+    {
+      "id": "linkedin_job_listings_information_by-job-listing-url",
+      "displayName": "通过职位列表URL采集",
+      "product": "领英",
+      "productSign": "",
+      "spiderName": "linkedin.com",
+      "group": "LinkedIn职位列表采集工具",
+      "toolId": 92,
+      "params": [
+        "page_turning",
+        "job_listing_url"
+      ],
+      "required": [
+        "144"
+      ]
+    },
+    {
+      "id": "linkedin_job_listings_information_by-job-url",
+      "displayName": "通过职位URL采集",
+      "product": "领英",
+      "productSign": "",
+      "spiderName": "linkedin.com",
+      "group": "LinkedIn职位列表采集工具",
+      "toolId": 93,
+      "params": [
+        "job_url"
+      ],
+      "required": [
+        "158"
+      ]
+    },
+    {
+      "id": "linkedin_job_listings_information_by-keyword",
+      "displayName": "通过关键词采集",
+      "product": "领英",
+      "productSign": "",
+      "spiderName": "linkedin.com",
+      "group": "LinkedIn职位列表采集工具",
+      "toolId": 94,
+      "params": [
+        "page_turning",
+        "location_radius",
+        "jobs_to_not_include",
+        "selective_search",
+        "company",
+        "remote",
+        "job_type",
+        "experience_level",
+        "time_range",
+        "keyword",
+        "location"
+      ],
+      "required": [
+        "159"
+      ]
+    },
+    {
+      "id": "amazon_product-list_by-keywords-domain",
+      "displayName": "通过关键词采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品列表采集工具",
+      "toolId": 11,
+      "params": [
+        "page_turning",
+        "domain",
+        "keyword"
+      ],
+      "required": [
+        "2",
+        "9"
+      ]
+    },
+    {
+      "id": "amazon_comment_by-url",
+      "displayName": "通过URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品评论采集工具",
+      "toolId": 9,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "1"
+      ]
+    },
+    {
+      "id": "amazon_product_by-asin",
+      "displayName": "通过ASIN采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品详情采集工具",
+      "toolId": 79,
+      "params": [
+        "asin"
+      ],
+      "required": [
+        "117"
+      ]
+    },
+    {
+      "id": "amazon_product_by-best-sellers",
+      "displayName": "通过畅销商品 URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品详情采集工具",
+      "toolId": 7,
+      "params": [
+        "page_turning",
+        "collect_child_categories",
+        "url"
+      ],
+      "required": [
+        "5",
+        "10"
+      ]
+    },
+    {
+      "id": "amazon_product_by-category-url",
+      "displayName": "通过类别 URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品详情采集工具",
+      "toolId": 3,
+      "params": [
+        "page_turning",
+        "sort_by",
+        "url"
+      ],
+      "required": [
+        "1",
+        "10"
+      ]
+    },
+    {
+      "id": "amazon_product_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品详情采集工具",
+      "toolId": 2,
+      "params": [
+        "highest_price",
+        "lowest_price",
+        "page_turning",
+        "keyword"
+      ],
+      "required": [
+        "2"
+      ]
+    },
+    {
+      "id": "amazon_product_by-url",
+      "displayName": "通过URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 产品详情采集工具",
+      "toolId": 1,
+      "params": [
+        "zip_code",
+        "url"
+      ],
+      "required": [
+        "1"
+      ]
+    },
+    {
+      "id": "amazon_seller_by-url",
+      "displayName": "通过URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 卖家信息采集工具",
+      "toolId": 10,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "1"
+      ]
+    },
+    {
+      "id": "amazon_global-product_by-category-url",
+      "displayName": "通过类别 URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 全球产品详情采集工具",
+      "toolId": 13,
+      "params": [
+        "maximum",
+        "get_sponsored",
+        "sort_by",
+        "url"
+      ],
+      "required": [
+        "1",
+        "27"
+      ]
+    },
+    {
+      "id": "amazon_global-product_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 全球产品详情采集工具",
+      "toolId": 4,
+      "params": [
+        "page_turning",
+        "highest_price",
+        "lowest_price",
+        "domain",
+        "keyword"
+      ],
+      "required": [
+        "2",
+        "9"
+      ]
+    },
+    {
+      "id": "amazon_global-product_by-keywords-brand",
+      "displayName": "通过关键词 or 品牌采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 全球产品详情采集工具",
+      "toolId": 21,
+      "params": [
+        "page_turning",
+        "brands",
+        "keyword"
+      ],
+      "required": [
+        "2",
+        "40",
+        "10"
+      ]
+    },
+    {
+      "id": "amazon_global-product_by-url",
+      "displayName": "通过URL采集",
+      "product": "亚马逊",
+      "productSign": "",
+      "spiderName": "amazon.com",
+      "group": "Amazon 全球产品详情采集工具",
+      "toolId": 15,
+      "params": [
+        "url"
+      ],
+      "required": [
+        "1"
+      ]
+    },
+    {
+      "id": "chatgpt_answer_by-keywords",
+      "displayName": "通过关键词采集",
+      "product": "ChatGPT",
+      "productSign": "",
+      "spiderName": "chatgpt.com",
+      "group": "ChatGPT 答案采集工具",
+      "params": [
+        "search_terms"
+      ]
+    },
+    {
+      "id": "chatgpt_answer_by-url",
+      "displayName": "通过URL采集",
+      "product": "ChatGPT",
+      "productSign": "",
+      "spiderName": "chatgpt.com",
+      "group": "ChatGPT 答案采集工具",
+      "params": [
+        "chatgpt_url"
+      ]
+    }
+  ],
+  "serps": [
+    {
+      "id": "bing",
+      "displayName": "Bing搜索",
+      "product": "Bing搜索引擎API",
+      "productSign": "",
+      "crawlerId": 121,
+      "params": []
+    },
+    {
+      "id": "bing_images",
+      "displayName": "Bing图片",
+      "product": "Bing搜索引擎API",
+      "productSign": "",
+      "crawlerId": 125,
+      "params": []
+    },
+    {
+      "id": "bing_maps",
+      "displayName": "Bing地图",
+      "product": "Bing搜索引擎API",
+      "productSign": "",
+      "crawlerId": 122,
+      "params": []
+    },
+    {
+      "id": "bing_news",
+      "displayName": "Bing新闻",
+      "product": "Bing搜索引擎API",
+      "productSign": "",
+      "crawlerId": 126,
+      "params": []
+    },
+    {
+      "id": "bing_shopping",
+      "displayName": "Bing购物",
+      "product": "Bing搜索引擎API",
+      "productSign": "",
+      "crawlerId": 123,
+      "params": []
+    },
+    {
+      "id": "bing_videos",
+      "displayName": "Bing视频",
+      "product": "Bing搜索引擎API",
+      "productSign": "",
+      "crawlerId": 124,
+      "params": []
+    },
+    {
+      "id": "duckduckgo",
+      "displayName": "DuckDuckGo搜索",
+      "product": "DuckDuckGo搜索引擎API",
+      "productSign": "",
+      "crawlerId": 128,
+      "params": []
+    },
+    {
+      "id": "google",
+      "displayName": "谷歌搜索",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 103,
+      "params": []
+    },
+    {
+      "id": "google_ai_mode",
+      "displayName": "谷歌AI mode",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 131,
+      "params": []
+    },
+    {
+      "id": "google_finance",
+      "displayName": "谷歌金融",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 113,
+      "params": []
+    },
+    {
+      "id": "google_flights",
+      "displayName": "谷歌航班",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 112,
+      "params": []
+    },
+    {
+      "id": "google_hotels",
+      "displayName": "谷歌酒店",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 115,
+      "params": []
+    },
+    {
+      "id": "google_images",
+      "displayName": "谷歌图片",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 132,
+      "params": []
+    },
+    {
+      "id": "google_jobs",
+      "displayName": "谷歌工作",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 111,
+      "params": []
+    },
+    {
+      "id": "google_lens",
+      "displayName": "谷歌镜头",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 114,
+      "params": []
+    },
+    {
+      "id": "google_local",
+      "displayName": "谷歌本地",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 110,
+      "params": []
+    },
+    {
+      "id": "google_maps",
+      "displayName": "谷歌地图",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 105,
+      "params": []
+    },
+    {
+      "id": "google_news",
+      "displayName": "谷歌新闻",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 118,
+      "params": []
+    },
+    {
+      "id": "google_patents",
+      "displayName": "谷歌专利",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 120,
+      "params": []
+    },
+    {
+      "id": "google_play",
+      "displayName": "谷歌商店",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 117,
+      "params": []
+    },
+    {
+      "id": "google_scholar",
+      "displayName": "谷歌学术",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 119,
+      "params": []
+    },
+    {
+      "id": "google_shopping",
+      "displayName": "谷歌购物",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 106,
+      "params": []
+    },
+    {
+      "id": "google_trends",
+      "displayName": "谷歌趋势",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 116,
+      "params": []
+    },
+    {
+      "id": "google_videos",
+      "displayName": "谷歌视频",
+      "product": "谷歌搜索引擎API",
+      "productSign": "",
+      "crawlerId": 107,
+      "params": []
+    },
+    {
+      "id": "yandex",
+      "displayName": "Yandex搜索",
+      "product": "Yandex搜索引擎API",
+      "productSign": "facebook_event_by-events-url",
+      "params": [],
+      "notes": "官网 getScraperList 返回 Yandex 产品，但 getSerpDetail 当前返回空；SDK 暂按 engine=yandex 生成便捷方法，调用前需后端确认该 engine 可用。"
+    }
+  ]
+}

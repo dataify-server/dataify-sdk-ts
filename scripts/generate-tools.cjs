@@ -1,105 +1,45 @@
-const fs = require("node:fs");
+﻿const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const toolsDoc = path.join(root, "docs", "TOOLS.zh-CN.md");
+const sourcePath = path.join(root, "scripts", "tools.source.json");
 const outDir = path.join(root, "src", "generated");
+const docPath = path.join(root, "docs", "TOOLS.zh-CN.md");
 
 function main() {
-  const doc = fs.readFileSync(toolsDoc, "utf8");
-  const scraperRows = parseSection(doc, "## Scraper 执行工具").map(parseScraperRow).filter(Boolean);
-  const serpRows = parseSection(doc, "## SERP 执行工具").map(parseSerpRow).filter(Boolean);
-
-  if (!serpRows.some((row) => row.id === "yandex")) {
-    serpRows.push({
-      kind: "serp",
-      methodName: "yandex",
-      id: "yandex",
-      displayName: "Yandex搜索",
-      product: "Yandex搜索引擎API",
-      productSign: "facebook_event_by-events-url",
-      crawlerId: undefined,
-      params: [],
-      notes: "官网 getScraperList 返回 Yandex 产品，但 getSerpDetail 当前返回空；SDK 暂按 engine=yandex 生成便捷方法，调用前需后端确认该 engine 可用。",
-    });
-  }
+  const source = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
+  const scrapers = (source.scrapers ?? []).map((spec) => toEntry("scraper", spec));
+  const serps = (source.serps ?? []).map((spec) => toEntry("serp", spec));
+  validate([...scrapers, ...serps]);
 
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, "specs.ts"), renderSpecs(scraperRows, serpRows), "utf8");
-  fs.writeFileSync(path.join(outDir, "tools.ts"), renderTools(scraperRows, serpRows), "utf8");
+  fs.writeFileSync(path.join(outDir, "specs.ts"), renderSpecs(scrapers, serps), "utf8");
+  fs.writeFileSync(path.join(outDir, "tools.ts"), renderTools(scrapers, serps), "utf8");
+  fs.writeFileSync(docPath, renderDoc(fs.readFileSync(docPath, "utf8"), scrapers, serps), "utf8");
 
   console.log(JSON.stringify({
-    scraper: scraperRows.length,
-    serp: serpRows.length,
-    total: scraperRows.length + serpRows.length,
+    scraper: scrapers.length,
+    serp: serps.length,
+    total: scrapers.length + serps.length,
   }, null, 2));
 }
 
-function parseSection(doc, heading) {
-  const start = doc.indexOf(heading);
-  if (start < 0) return [];
-  const next = doc.indexOf("\n## ", start + heading.length);
-  const section = doc.slice(start, next < 0 ? doc.length : next);
-  return section.split(/\r?\n/).filter((line) => /^\| \d+ \|/.test(line));
+function toEntry(kind, spec) {
+  return { kind, methodName: toCamelCase(spec.id), ...spec };
 }
 
-function splitRow(line) {
-  return line
-    .replace(/^\|/, "")
-    .replace(/\|$/, "")
-    .split("|")
-    .map((cell) => cell.trim().replace(/^`|`$/g, ""));
-}
-
-function parseParams(value) {
-  if (!value || value === "``") return [];
-  return value
-    .replace(/^`|`$/g, "")
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean);
-}
-
-function parseScraperRow(line) {
-  const cells = splitRow(line);
-  if (cells.length < 8) return null;
-  const id = cells[1];
-  const product = cells[3];
-  return {
-    kind: "scraper",
-    methodName: toCamelCase(id),
-    id,
-    displayName: cells[2],
-    product,
-    group: cells[4],
-    productSign: "",
-    spiderName: defaultSpiderName(product),
-    toolId: toNumber(cells[5]),
-    params: parseParams(cells[6]),
-    required: parseParams(cells[7]),
-  };
-}
-
-function parseSerpRow(line) {
-  const cells = splitRow(line);
-  if (cells.length < 6) return null;
-  const id = cells[1];
-  if (!id) return null;
-  return {
-    kind: "serp",
-    methodName: toCamelCase(id),
-    id,
-    displayName: cells[2],
-    product: cells[3],
-    productSign: "",
-    crawlerId: toNumber(cells[4]),
-    params: parseParams(cells[5]),
-  };
-}
-
-function toNumber(value) {
-  const n = Number(value);
-  return Number.isFinite(n) ? n : undefined;
+function validate(entries) {
+  const seen = new Map();
+  for (const entry of entries) {
+    if (!entry.id) throw new Error(`Tool entry is missing an id: ${JSON.stringify(entry)}`);
+    if (!entry.displayName) throw new Error(`Tool ${entry.id} is missing displayName`);
+    if (!entry.product) throw new Error(`Tool ${entry.id} is missing product`);
+    if (!entry.methodName) throw new Error(`Tool ${entry.id} produced an empty methodName`);
+    if (seen.has(entry.methodName)) {
+      throw new Error(`Duplicate methodName ${entry.methodName} for ids ${seen.get(entry.methodName)} and ${entry.id}`);
+    }
+    seen.set(entry.methodName, entry.id);
+  }
 }
 
 function toCamelCase(id) {
@@ -112,33 +52,8 @@ function q(value) {
   return JSON.stringify(value);
 }
 
-function defaultSpiderName(product) {
-  return ({
-    Airbnb: "airbnb.com",
-    Booking: "booking.com",
-    Crunchbase: "crunchbase.com",
-    eBay: "ebay.com",
-    Facebook: "facebook.com",
-    Github: "github.com",
-    Glassdoor: "glassdoor.com",
-    Google: "google.com",
-    "Google Play Store": "play.google.com",
-    Indeed: "indeed.com",
-    Instagram: "instagram.com",
-    Reddit: "reddit.com",
-    Tiktok: "tiktok.com",
-    Twitter: "x.com",
-    Walmart: "walmart.com",
-    YouTube: "youtube.com",
-    Zillow: "zillow.com",
-    "领英": "linkedin.com",
-    "亚马逊": "amazon.com",
-  })[product];
-}
-
 function renderSpecs(scraperRows, serpRows) {
-  const all = [...scraperRows, ...serpRows];
-  const entries = all.map((spec) => {
+  const entries = [...scraperRows, ...serpRows].map((spec) => {
     const fields = [
       `kind: ${q(spec.kind)}`,
       `methodName: ${q(spec.methodName)}`,
@@ -193,6 +108,62 @@ export class GeneratedToolsService {
 ${methods.join("\n\n")}
 }
 `;
+}
+
+function renderDoc(doc, scraperRows, serpRows) {
+  let lines = doc.split(/\r?\n/);
+  lines = replaceStat(lines, "Scraper 工具", scraperRows.length);
+  lines = replaceStat(lines, "SERP 工具", serpRows.length);
+  lines = replaceStat(lines, "SDK 工具方法合计", scraperRows.length + serpRows.length);
+  lines = replaceTable(lines, "## Scraper 工具", renderScraperTable(scraperRows));
+  lines = replaceTable(lines, "## SERP 工具", renderSerpTable(serpRows));
+  return lines.join("\n");
+}
+
+function replaceStat(lines, label, value) {
+  const prefix = `| ${label} | `;
+  return lines.map((line) => (line.startsWith(prefix) && line.endsWith(" |")
+    ? `${prefix}${value} |`
+    : line));
+}
+
+function replaceTable(lines, heading, tableLines) {
+  const headingIndex = lines.indexOf(heading);
+  if (headingIndex < 0) throw new Error(`Doc heading not found: ${heading}`);
+  let start = headingIndex + 1;
+  while (start < lines.length && !lines[start].startsWith("|")) start += 1;
+  if (start >= lines.length) throw new Error(`Doc table not found after: ${heading}`);
+  let end = start;
+  while (end < lines.length && lines[end].startsWith("|")) end += 1;
+  const next = lines.slice();
+  next.splice(start, end - start, ...tableLines);
+  return next;
+}
+
+function renderScraperTable(rows) {
+  const lines = [
+    "| # | SDK 方法 | spider_id | 产品 | spider_name | 参数 |",
+    "|---:|---|---|---|---|---|",
+  ];
+  rows.forEach((spec, index) => {
+    const spiderName = spec.spiderName ? `\`${spec.spiderName}\`` : "-";
+    const params = (spec.params ?? []).join(", ") || "-";
+    lines.push(`| ${index + 1} | \`${spec.methodName}\` | \`${spec.id}\` | ${spec.product} | ${spiderName} | ${params} |`);
+  });
+  return lines;
+}
+
+function renderSerpTable(rows) {
+  const lines = [
+    "| # | SDK 方法 | engine | 产品 | 参数 | 备注 |",
+    "|---:|---|---|---|---|---|",
+  ];
+  rows.forEach((spec, index) => {
+    const params = (spec.params ?? []).join(", ") || "-";
+    const notes = spec.notes || "-";
+    lines.push(`| ${index + 1} | \`${spec.methodName}\` | \`${spec.id}\` | ${spec.product} | ${params} | ${notes} |`);
+  });
+  return lines;
 }
 
 main();

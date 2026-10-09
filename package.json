@@ -1,35 +1,36 @@
 {
-    "name":  "dataify-sdk",
-    "version":  "0.1.0",
-    "description":  "TypeScript SDK for Dataify API Key based Scraper, SERP, and Web Unlocker runtime APIs.",
-    "type":  "module",
-    "main":  "dist/index.js",
-    "types":  "dist/index.d.ts",
-    "files":  [
-                  "dist",
-                  "README.md",
-                  "docs",
-                  "examples/*.mjs",
-                  "examples/README.md",
-                  "examples/all-tools/*.mjs",
-                  "examples/all-tools/README.zh-CN.md"
-              ],
-    "scripts":  {
-                    "clean":  "node scripts/clean.cjs",
-                    "build":  "npm run clean \u0026\u0026 tsc -p tsconfig.json",
-                    "check":  "tsc -p tsconfig.json --noEmit",
-                    "test":  "npm run build && node --test scripts/token-resolution.test.mjs scripts/task-status.test.mjs scripts/download.test.mjs",
-                    "generate":  "node scripts/generate-tools.cjs"
-                },
-    "keywords":  [
-                     "dataify",
-                     "sdk",
-                     "scraper",
-                     "serp",
-                     "web-unlocker"
-                 ],
-    "license":  "MIT",
-    "devDependencies":  {
-                            "typescript":  "^5.5.0"
-                        }
+    "name": "dataify-sdk",
+    "version": "0.2.0",
+    "description": "TypeScript SDK for Dataify API Key based Scraper, SERP, and Web Unlocker runtime APIs.",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "README.md",
+        "docs",
+        "examples/*.mjs",
+        "examples/README.md",
+        "examples/all-tools/*.mjs",
+        "examples/all-tools/README.zh-CN.md"
+    ],
+    "scripts": {
+        "clean": "node scripts/clean.cjs",
+        "build": "npm run clean && tsc -p tsconfig.json",
+        "check": "tsc -p tsconfig.json --noEmit",
+        "test": "npm run build && node --test scripts/token-resolution.test.mjs scripts/task-status.test.mjs scripts/download.test.mjs",
+        "generate": "node scripts/generate-tools.cjs",
+        "prepublishOnly": "npm test"
+    },
+    "keywords": [
+        "dataify",
+        "sdk",
+        "scraper",
+        "serp",
+        "web-unlocker"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+        "typescript": "^5.5.0"
+    }
 }

@@ -359,6 +359,14 @@ export class GeneratedToolsService {
     return this.client.scraper.runScraperTool<T>({ spiderName: "amazon.com", ...options, spiderId: "amazon_global-product_by-url", parameters: params });
   }
 
+  chatgptAnswerByKeywords<T = unknown>(params: ParamRecord = {}, options: Omit<ScraperRunOptions, "spiderId" | "parameters"> = {}): Promise<T> {
+    return this.client.scraper.runScraperTool<T>({ spiderName: "chatgpt.com", ...options, spiderId: "chatgpt_answer_by-keywords", parameters: params });
+  }
+
+  chatgptAnswerByUrl<T = unknown>(params: ParamRecord = {}, options: Omit<ScraperRunOptions, "spiderId" | "parameters"> = {}): Promise<T> {
+    return this.client.scraper.runScraperTool<T>({ spiderName: "chatgpt.com", ...options, spiderId: "chatgpt_answer_by-url", parameters: params });
+  }
+
 
   bing<T = unknown>(params: ParamRecord = {}): Promise<T> {
     return this.client.serp.runSerpTool<T>("bing", params);
