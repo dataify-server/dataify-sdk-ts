@@ -1,6 +1,7 @@
 import { ScraperService } from "./services/scraper.js";
 import { SerpService } from "./services/serp.js";
 import { WebUnlockerService } from "./services/web-unlocker.js";
+import { AIWebService } from "./services/ai-web.js";
 import { GeneratedToolsService } from "./generated/tools.js";
 import type { DataifyClientOptions } from "./types.js";
 
@@ -15,18 +16,21 @@ export class DataifyClient {
   apiKey: string;
   readonly scraperBaseUrl: string;
   readonly webUnlockerBaseUrl: string;
+  readonly aiWebBaseUrl: string;
   readonly timeoutMs: number;
   readonly fetchImpl: typeof fetch;
 
   readonly scraper: ScraperService;
   readonly serp: SerpService;
   readonly webUnlocker: WebUnlockerService;
+  readonly aiWeb: AIWebService;
   readonly tools: GeneratedToolsService;
 
   constructor(options: DataifyClientOptions = {}) {
     this.apiKey = resolveApiKey(options.apiKey);
     this.scraperBaseUrl = trimBaseUrl(options.scraperBaseUrl ?? "https://scraperapi.dataify.com");
     this.webUnlockerBaseUrl = trimBaseUrl(options.webUnlockerBaseUrl ?? "https://webunlocker.dataify.com");
+    this.aiWebBaseUrl = resolveAIWebBaseUrl(options.aiWebBaseUrl);
     this.timeoutMs = options.timeoutMs ?? 120_000;
     this.fetchImpl = options.fetchImpl ?? globalThis.fetch;
     if (!this.fetchImpl) {
@@ -36,6 +40,7 @@ export class DataifyClient {
     this.scraper = new ScraperService(this);
     this.serp = new SerpService(this);
     this.webUnlocker = new WebUnlockerService(this);
+    this.aiWeb = new AIWebService(this);
     this.tools = new GeneratedToolsService(this);
   }
 
@@ -76,6 +81,14 @@ function resolveApiKey(explicitApiKey?: string): string {
 
 function normalizeApiKey(value?: string): string {
   return value?.trim() ?? "";
+}
+
+function resolveAIWebBaseUrl(explicitBaseUrl?: string): string {
+  const runtimeProcess = (globalThis as typeof globalThis & { process?: RuntimeProcess }).process;
+  const baseUrl = normalizeApiKey(explicitBaseUrl) ||
+    normalizeApiKey(runtimeProcess?.env?.AI_WEB_API_BASE_URL) ||
+    "https://aiwebapi.dataify.com";
+  return trimBaseUrl(baseUrl);
 }
 
 function warnIfLegacyEnvironmentToken(token: string, runtimeProcess?: RuntimeProcess): void {

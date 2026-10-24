@@ -6,6 +6,7 @@ export interface DataifyClientOptions {
   apiKey?: string;
   scraperBaseUrl?: string;
   webUnlockerBaseUrl?: string;
+  aiWebBaseUrl?: string;
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
 }
@@ -50,6 +51,77 @@ export interface WebUnlockerRequest {
   follow_redirect?: string | boolean;
   isjson?: string | number | boolean;
   [key: string]: unknown;
+}
+
+export type AIWebOperation = "search" | "map" | "extract";
+
+export type AIWebFormat = "markdown" | "raw_html" | "clean_html" | "links";
+
+export type AIWebSearchSource = "web" | "news" | "shopping" | "scholar";
+
+export type AIWebTimeRange = "hour" | "day" | "week" | "month" | "year";
+
+export type AIWebDomainFilter = "domain" | "all";
+
+export type AIWebSitemapMode = "skip" | "include" | "only";
+
+export type AIWebOutput = unknown[] | Record<string, unknown> | null;
+
+export interface AIWebExtractOptions {
+  formats?: AIWebFormat[];
+  only_main_content?: boolean;
+  include_tags?: string[];
+  exclude_tags?: string[];
+  max_age_ms?: number;
+  timeout_ms?: number;
+  wait_for_ms?: number;
+  advanced_mode?: boolean;
+  [key: string]: unknown;
+}
+
+export interface AIWebBaseRequest {
+  unique_id: string;
+  [key: string]: unknown;
+}
+
+export interface AIWebSearchRequest extends AIWebBaseRequest {
+  query: string;
+  max_results?: number;
+  source?: AIWebSearchSource;
+  country?: string;
+  language?: string;
+  time_range?: AIWebTimeRange;
+  extract_content?: boolean;
+  extract_options?: AIWebExtractOptions;
+}
+
+export interface AIWebMapRequest extends AIWebBaseRequest {
+  url: string;
+  country?: string;
+  domain_filter?: AIWebDomainFilter;
+  limit?: number;
+  sitemap?: AIWebSitemapMode;
+}
+
+export interface AIWebExtractRequest extends AIWebBaseRequest {
+  url: string;
+  formats?: AIWebFormat[];
+  only_main_content?: boolean;
+  include_tags?: string[];
+  exclude_tags?: string[];
+  headers?: Record<string, string>;
+  max_age_ms?: number;
+  timeout_ms?: number;
+  wait_for_ms?: number;
+  country?: string;
+  advanced_mode?: boolean;
+}
+
+export type AIWebRequest = AIWebSearchRequest | AIWebMapRequest | AIWebExtractRequest;
+
+export interface AIWebResponse<T = unknown[]> {
+  request_id: string | null;
+  outputs: T;
 }
 
 export interface ToolSpec {

@@ -1,7 +1,7 @@
 {
     "name": "dataify-sdk",
     "version": "0.2.0",
-    "description": "TypeScript SDK for Dataify API Key based Scraper, SERP, and Web Unlocker runtime APIs.",
+    "description": "TypeScript SDK for Dataify API Key based Scraper, SERP, Web Unlocker, and AI Web runtime APIs.",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
         "clean": "node scripts/clean.cjs",
         "build": "npm run clean && tsc -p tsconfig.json",
         "check": "tsc -p tsconfig.json --noEmit",
-        "test": "npm run build && node --test scripts/token-resolution.test.mjs scripts/task-status.test.mjs scripts/download.test.mjs",
+        "test": "npm run build && node --test scripts/token-resolution.test.mjs scripts/task-status.test.mjs scripts/download.test.mjs scripts/ai-web.test.mjs scripts/transport-errors.test.mjs",
         "generate": "node scripts/generate-tools.cjs",
         "prepublishOnly": "npm test"
     },
@@ -27,7 +27,8 @@
         "sdk",
         "scraper",
         "serp",
-        "web-unlocker"
+        "web-unlocker",
+        "ai-web"
     ],
     "license": "MIT",
     "devDependencies": {

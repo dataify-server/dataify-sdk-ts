@@ -7,6 +7,7 @@
 - Scraper tools: `client.tools.<methodName>(params)`
 - SERP tools: `client.tools.google(params)`, `client.tools.bing(params)`, and other generated SERP methods
 - Web Unlocker: `client.webUnlocker.request(params)`
+- AI Web: `client.aiWeb.search(params)`, `client.aiWeb.map(params)`, and `client.aiWeb.extract(params)`
 - Scraper result download by task id
 
 ## Requirements
@@ -62,6 +63,60 @@ const result = await client.webUnlocker.request({
 });
 ```
 
+## AI Web Example
+
+AI Web uses the `unique_id` configured for the selected tool. The three search,
+map, and extract methods normalize `outputs` to an array for consistent handling:
+
+```ts
+import { AI_WEB_UNIQUE_IDS, DataifyClient } from "dataify-sdk";
+
+const client = new DataifyClient({
+  apiKey: process.env.DATAIFY_API_TOKEN,
+  aiWebBaseUrl: process.env.AI_WEB_API_BASE_URL ?? "https://aiwebapi.dataify.com",
+});
+
+const result = await client.aiWeb.search({
+  unique_id: AI_WEB_UNIQUE_IDS.searchNews,
+  query: "Dataify",
+  max_results: 3,
+  source: "news",
+});
+
+console.log(result.request_id); // X-Request-Id, or null
+console.log(result.outputs);    // always an array
+```
+
+AI Web defaults to `https://aiwebapi.dataify.com`. Set `AI_WEB_API_BASE_URL` or
+pass `aiWebBaseUrl` to override it for a custom environment:
+
+```ts
+const client = new DataifyClient({
+  apiKey: process.env.DATAIFY_API_TOKEN,
+  aiWebBaseUrl: "https://aiwebapi.dataify.com",
+});
+```
+
+See [docs/AI_WEB.md](docs/AI_WEB.md) for the full parameter and
+download reference.
+
+Use `executeRaw(operation, params)` when the exact upstream output shape is
+needed. `downloadResult(taskId)` downloads a successful AI Web task within the
+retention window:
+
+```ts
+const raw = await client.aiWeb.executeRaw("extract", {
+  unique_id: AI_WEB_UNIQUE_IDS.extract,
+  url: "https://example.com",
+  formats: ["markdown"],
+});
+
+if (raw.request_id) {
+  const downloaded = await client.aiWeb.downloadResult(raw.request_id);
+  console.log(downloaded);
+}
+```
+
 ## Download Scraper Result
 
 ```ts
@@ -89,6 +144,7 @@ the API key, and HTTP `403` for a missing `task_id` or invalid API key.
 
 - Scraper and SERP: `https://scraperapi.dataify.com`
 - Web Unlocker: `https://webunlocker.dataify.com`
+- AI Web: `https://aiwebapi.dataify.com`
 
 Most requests use:
 

@@ -30,6 +30,7 @@ These calls may consume credits.
 node examples\01-serp-google.mjs
 node examples\02-serp-news-and-maps.mjs
 node examples\03-web-unlocker.mjs
+node examples\12-ai-web.mjs
 node examples\05-scraper-amazon-by-keyword.mjs
 node examples\06-scraper-social.mjs
 node examples\07-scraper-ecommerce.mjs
