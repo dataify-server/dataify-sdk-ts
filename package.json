@@ -1,6 +1,6 @@
 {
     "name": "dataify-sdk",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "TypeScript SDK for Dataify API Key based Scraper, SERP, Web Unlocker, and AI Web runtime APIs.",
     "type": "module",
     "main": "dist/index.js",
@@ -8,11 +8,7 @@
     "files": [
         "dist",
         "README.md",
-        "docs",
-        "examples/*.mjs",
-        "examples/README.md",
-        "examples/all-tools/*.mjs",
-        "examples/all-tools/README.zh-CN.md"
+        "docs/AI_WEB.md"
     ],
     "scripts": {
         "clean": "node scripts/clean.cjs",
