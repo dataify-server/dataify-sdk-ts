@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { DataifyApiError, DataifyClient, DataifyMissingTokenError } from "../dist/index.js";
+import { withNoTokenEnvironment } from "./test-env.mjs";
 
 test("getTaskStatus sends the documented query without a bearer header", async () => {
   const calls = [];
@@ -65,15 +66,17 @@ test("getTaskStatus propagates documented 400 and 403 responses", async () => {
 });
 
 test("getTaskStatus rejects a missing local token before sending a request", async () => {
-  const client = new DataifyClient({
-    apiKey: "",
-    fetchImpl: async () => {
-      throw new Error("fetch should not be called");
-    },
-  });
+  await withNoTokenEnvironment(async () => {
+    const client = new DataifyClient({
+      apiKey: "",
+      fetchImpl: async () => {
+        throw new Error("fetch should not be called");
+      },
+    });
 
-  await assert.rejects(
-    client.scraper.getTaskStatus("task-123"),
-    (error) => error instanceof DataifyMissingTokenError,
-  );
+    await assert.rejects(
+      client.scraper.getTaskStatus("task-123"),
+      (error) => error instanceof DataifyMissingTokenError,
+    );
+  });
 });

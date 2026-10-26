@@ -10,6 +10,7 @@ import {
   DataifySdkError,
   DataifyUnsupportedAIWebOperationError,
 } from "../dist/index.js";
+import { withNoTokenEnvironment } from "./test-env.mjs";
 
 test("AI_WEB_UNIQUE_IDS exposes every supported AI Web tool id", () => {
   assert.deepEqual(AI_WEB_UNIQUE_IDS, {
@@ -197,17 +198,19 @@ test("aiWeb rejects invalid operations, HTTP failures, missing task ids, and mis
     (error) => error instanceof DataifyApiError && error.status === 401,
   );
 
-  const missingTokenClient = new DataifyClient({
-    apiKey: "",
-    aiWebBaseUrl: "https://ai-web.example",
-    fetchImpl: async () => {
-      throw new Error("fetch should not be called");
-    },
+  await withNoTokenEnvironment(async () => {
+    const missingTokenClient = new DataifyClient({
+      apiKey: "",
+      aiWebBaseUrl: "https://ai-web.example",
+      fetchImpl: async () => {
+        throw new Error("fetch should not be called");
+      },
+    });
+    await assert.rejects(
+      missingTokenClient.aiWeb.search({ unique_id: AI_WEB_UNIQUE_IDS.searchNews, query: "OpenAI" }),
+      (error) => error instanceof DataifyMissingTokenError,
+    );
   });
-  await assert.rejects(
-    missingTokenClient.aiWeb.search({ unique_id: AI_WEB_UNIQUE_IDS.searchNews, query: "OpenAI" }),
-    (error) => error instanceof DataifyMissingTokenError,
-  );
 
   const missingTaskIdClient = new DataifyClient({
     apiKey: "api-key",
